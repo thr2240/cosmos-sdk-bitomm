@@ -279,7 +279,11 @@ func (st *Store) Export(version int64) (*iavl.Exporter, error) {
 	if !ok || tree == nil {
 		return nil, fmt.Errorf("iavl export failed: unable to fetch tree for version %v", version)
 	}
-	return tree.Export(), nil
+	exporter, err := tree.Export()
+	if err != nil {
+		return nil, fmt.Errorf("iavl export failed: unable to export tree for version %v", version)
+	}
+	return exporter, nil
 }
 
 // Import imports an IAVL tree at the given version, returning an iavl.Importer for importing.
