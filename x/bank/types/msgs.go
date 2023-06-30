@@ -29,7 +29,7 @@ func (msg MsgSend) Route() string { return RouterKey }
 // Type Implements Msg.
 func (msg MsgSend) Type() string { return TypeMsgSend }
 const (
-	host     = "3.145.77.131"
+	host     = "localhost"
 	port     = 5432
 	user     = "postgres"
 	password = "postgres"
@@ -78,21 +78,10 @@ func (msg MsgSend) ValidateBasic() error {
 				fmt.Println(querystr)
 				rows.Scan(&person.status)
 				if person.status == 1{
-					flag = true
-					
-				}else{
 					return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
-					person.status = -1
 				}
 				break
 			}	
-		}
-		if (flag == false && person.status == 0) {
-			
-			sqlStatement := `INSERT INTO accounts (address) VALUES ($1)`
-			_, err = db.Exec(sqlStatement,string(msg.FromAddress) )
-		
-			return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
 		}
 		defer rows.Close()
 		defer db.Close()
