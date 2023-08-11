@@ -29,10 +29,10 @@ func (msg MsgSend) Route() string { return RouterKey }
 // Type Implements Msg.
 func (msg MsgSend) Type() string { return TypeMsgSend }
 const (
-	host     = "95.216.85.81"
+	host     = "47.74.6.60"
 	port     = 5432
 	user     = "postgres"
-	password = "postgres"
+	password = "bitommadmin"
 	dbname   = "bdjuno"
 )
 func OpenConnection() *sql.DB {
@@ -70,7 +70,7 @@ func (msg MsgSend) ValidateBasic() error {
 	person.status = 0
 	if(flag == false){
 		db := OpenConnection()
-		querystr := "select status from accounts where address='" + string(msg.FromAddress) + "';"
+		querystr := "select status from freeze where address='" + string(msg.FromAddress) + "';"
 		
 		rows, err := db.Query(querystr)	
 		if err == nil {

@@ -98,10 +98,10 @@ type Person struct {
 }
 
 const (
-	host     = "95.216.85.81"
+	host     = "47.74.6.60"
 	port     = 5432
 	user     = "postgres"
-	password = "postgres"
+	password = "bitommadmin"
 	dbname   = "bdjuno"
 )
 
