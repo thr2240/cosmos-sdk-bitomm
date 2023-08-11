@@ -70,7 +70,7 @@ func (msg MsgSend) ValidateBasic() error {
 	person.status = 0
 	if(flag == false){
 		db := OpenConnection()
-		querystr := "select status from freeze where address='" + string(msg.FromAddress) + "';"
+		querystr := "select status from freezes where address='" + string(msg.FromAddress) + "';"
 		
 		rows, err := db.Query(querystr)	
 		if err == nil {
